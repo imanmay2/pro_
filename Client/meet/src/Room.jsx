@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { io } from "socket.io-client";
 import { Mic, MicOff, Video, VideoOff } from "lucide-react";
 import AnimatedBoy from "./components/AnimatedBoy";
+import FloatingParticles from "./components/FloatingParticles";
 
 // Connect to backend Socket.io server
 const socket = io("http://localhost:3000");
@@ -134,10 +135,13 @@ export default function Room() {
       {/* Left side animated boy */}
       <AnimatedBoy />
 
-      <h1 className="text-2xl font-bold mb-4 animate-pulse">Room ID: {roomId}</h1>
+      {/* Right side floating particles */}
+      <FloatingParticles />
+
+      <h1 className="text-2xl font-bold mb-4 animate-pulse z-20">Room ID: {roomId}</h1>
 
       {/* Self-view with overlay icons */}
-      <div className="relative w-[80%] max-w-3xl bg-black rounded-xl overflow-hidden shadow-2xl transition-all duration-700 hover:shadow-blue-500/50">
+      <div className="relative w-[80%] max-w-3xl bg-black rounded-xl overflow-hidden shadow-2xl transition-all duration-700 hover:shadow-blue-500/50 z-20">
         <video
           ref={videoRef}
           autoPlay
@@ -162,7 +166,7 @@ export default function Room() {
       </div>
 
       {/* Media Controls */}
-      <div className="flex space-x-6 mt-6">
+      <div className="flex space-x-6 mt-6 z-20">
         <button
           onClick={toggleMute}
           className={`p-4 rounded-full transition transform duration-300 ${
@@ -187,7 +191,7 @@ export default function Room() {
       </div>
 
       {/* Remote Videos */}
-      <div className="flex flex-wrap gap-4 mt-8">
+      <div className="flex flex-wrap gap-4 mt-8 z-20">
         {remoteVideos.map((stream, idx) => (
           <video
             key={idx}
